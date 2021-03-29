@@ -1,0 +1,10 @@
+export { default as AgentAPI } from "./modules/agent";
+export { default as ClientAPI } from "./modules/client";
+export { default as CurrencyAPI } from "./modules/currency";
+export { default as HallAPI } from "./modules/hall";
+export { default as HistoryAPI } from "./modules/history";
+export { default as PlayerAPI } from "./modules/player";
+export { default as ProviderAPI } from "./modules/provider";
+export { default as UserAPI } from "./modules/user";
+export { default as WebsiteAPI } from "./modules/website";
+export { default as GameAPI } from "./modules/game";
