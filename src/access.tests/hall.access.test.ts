@@ -179,7 +179,7 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".getById (чужой) Доступа нет", async () => {
+      test(".getById (чужой зал) Доступа нет", async () => {
         const r1 = await hall.getById({
           id: 415,
         });
@@ -194,7 +194,7 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".update (чужой) Доступа нет", async () => {
+      test(".update (чужой зал) Доступа нет", async () => {
         const r1 = await hall.update({
           id: 415,
           password: "123456",
