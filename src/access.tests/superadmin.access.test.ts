@@ -146,7 +146,7 @@ describe("Права доступа", () => {
 
       test(".depositMoney Доступ есть", async () => {
         const r1 = await hall.depositMoney({
-          id: 417,
+          id: 415,
           amount: 100,
         });
         expectHasAccess(r1);
@@ -154,7 +154,7 @@ describe("Права доступа", () => {
 
       test(".withdrawMoney Доступ есть", async () => {
         const r1 = await hall.withdrawMoney({
-          id: 417,
+          id: 415,
           amount: 100,
         });
         expectHasAccess(r1);

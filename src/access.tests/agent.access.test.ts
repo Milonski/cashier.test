@@ -40,7 +40,7 @@ describe("Права доступа", () => {
     });
 
     describe("Agent", () => {
-      test(".create Доступ есть", async () => {
+      test(".create (свой) Доступ есть", async () => {
         var randomLogin = generateRandomLogin("AutoTest_", 16);
         const r1 = await agent.create({
           clientId: 30,
@@ -57,7 +57,7 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".depositMoney Доступ есть", async () => {
+      test(".depositMoney (свой) Доступ есть", async () => {
         const r1 = await agent.depositMoney({
           id: 417,
           amount: 100,
@@ -65,7 +65,7 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".withdrawMoney Доступ есть", async () => {
+      test(".withdrawMoney (свой) Доступ есть", async () => {
         const r1 = await agent.withdrawMoney({
           id: 417,
           amount: 100,
@@ -73,7 +73,7 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".filter Доступ есть", async () => {
+      test(".filter (свой) Доступ есть", async () => {
         const r1 = await agent.filter({
           parentAgentId: 414,
           paging: {
@@ -84,14 +84,14 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".getById Доступ есть", async () => {
+      test(".getById (свой) Доступ есть", async () => {
         const r1 = await agent.getById({
           id: 417,
         });
         expectHasAccess(r1);
       });
 
-      test(".update Доступ есть", async () => {
+      test(".update (свой) Доступ есть", async () => {
         const r1 = await agent.update({
           id: 417,
           password: "123456",
@@ -112,11 +112,11 @@ describe("Права доступа", () => {
         expectHasNotAccess(r1);
       });
 
-      test(".getById Доступ есть", async () => {
+      test(".getById Доступа нет", async () => {
         const r1 = await cashierClient.getById({
           id: 30,
         });
-        expectHasAccess(r1);
+        expectHasNotAccess(r1);
       });
     });
 
@@ -128,7 +128,7 @@ describe("Права доступа", () => {
     });
 
     describe("Hall", () => {
-      test(".create Доступ есть", async () => {
+      test(".create (свой) Доступ есть", async () => {
         var randomLogin = generateRandomLogin("AutoTest_", 16);
         const r1 = await hall.create({
           clientId: 30,
@@ -144,7 +144,7 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".depositMoney Доступ есть", async () => {
+      test(".depositMoney (свой) Доступ есть", async () => {
         const r1 = await hall.depositMoney({
           id: 415,
           amount: 100,
@@ -152,7 +152,7 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".withdrawMoney Доступ есть", async () => {
+      test(".withdrawMoney (свой) Доступ есть", async () => {
         const r1 = await hall.withdrawMoney({
           id: 415,
           amount: 100,
@@ -160,9 +160,8 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".filter Доступ есть", async () => {
+      test(".filter (свой) Доступ есть", async () => {
         const r1 = await hall.filter({
-          clientId: 30,
           agentId: 414,
           paging: {
             offset: 0,
@@ -172,16 +171,16 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".getById Доступ есть", async () => {
+      test(".getById (свой) Доступ есть", async () => {
         const r1 = await hall.getById({
           id: 415,
         });
         expectHasAccess(r1);
       });
 
-      test(".update Доступ есть", async () => {
+      test(".update (свой) Доступ есть", async () => {
         const r1 = await hall.update({
-          id: 254,
+          id: 415,
           password: "123456",
         });
         expectHasAccess(r1);
@@ -204,7 +203,7 @@ describe("Права доступа", () => {
     });
 
     describe("Player", () => {
-      test(".create Доступ есть", async () => {
+      test(".create (свой) Доступ есть", async () => {
         var randomLogin = generateRandomLogin("AutoTest_", 16);
         const r1 = await player.create({
           login: randomLogin,
@@ -216,23 +215,23 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".depositMoney Доступ есть", async () => {
+      test(".depositMoney (свой) Доступ есть", async () => {
         const r1 = await player.depositMoney({
-          id: 417,
+          id: 410,
           amount: 100,
         });
         expectHasAccess(r1);
       });
 
-      test(".withdrawMoney Доступ есть", async () => {
+      test(".withdrawMoney (свой) Доступ есть", async () => {
         const r1 = await player.withdrawMoney({
-          id: 417,
+          id: 410,
           amount: 100,
         });
         expectHasAccess(r1);
       });
 
-      test(".filter Доступ есть", async () => {
+      test(".filter (свой) Доступ есть", async () => {
         const r1 = await player.filter({
           hallId: 415,
           paging: {
@@ -243,16 +242,16 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".getById Доступ есть", async () => {
+      test(".getById (свой) Доступ есть", async () => {
         const r1 = await player.getById({
-          id: 345,
+          id: 410,
         });
         expectHasAccess(r1);
       });
 
-      test(".update Доступ есть", async () => {
+      test(".update (свой) Доступ есть", async () => {
         const r1 = await player.update({
-          id: 345,
+          id: 415,
           password: "123456",
         });
         expectHasAccess(r1);
@@ -267,7 +266,7 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".disable Доступ есть", async () => {
+      test(".disable (свой) Доступ есть", async () => {
         const r1 = await provider.disable({
           ids: [2],
           agentId: 414,
@@ -275,7 +274,7 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".enable Доступ есть", async () => {
+      test(".enable (свой) Доступ есть", async () => {
         const r1 = await provider.enable({
           ids: [2],
           agentId: 414,
@@ -301,11 +300,11 @@ describe("Права доступа", () => {
     });
 
     describe("Website", () => {
-      test(".filter Доступ есть", async () => {
+      test(".filter (свой) Доступ есть", async () => {
         const r1 = await website.filter({
           agentId: 414,
         });
-        expectHasNotAccess(r1);
+        expectHasAccess(r1);
       });
 
       test(".disable Доступ есть", async () => {
@@ -324,7 +323,7 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".grantAccess Доступ есть", async () => {
+      test(".grantAccess (свой) Доступ есть", async () => {
         const r1 = await website.grantAccess({
           ids: [29],
           agentId: 417,
@@ -332,7 +331,7 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".revokeAccess Доступ есть", async () => {
+      test(".revokeAccess (свой) Доступ есть", async () => {
         const r1 = await website.revokeAccess({
           ids: [29],
           agentId: 417,
