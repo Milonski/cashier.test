@@ -305,7 +305,7 @@ describe("Права доступа", () => {
         const r1 = await website.filter({
           agentId: 414,
         });
-        expect(r1).not.toHaveProperty("error.code", -32001);
+        expectHasNotAccess(r1);
       });
 
       test(".disable Доступ есть", async () => {
