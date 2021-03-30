@@ -121,7 +121,7 @@ describe("Права доступа", () => {
     });
 
     describe("Currency", () => {
-      test(".getById Доступа нет", async () => {
+      test(".getAll Доступа нет", async () => {
         const r1 = await currency.getAll();
         expectHasNotAccess(r1);
       });
@@ -172,11 +172,18 @@ describe("Права доступа", () => {
         expectHasNotAccess(r1);
       });
 
-      test(".getById Доступ есть", async () => {
+      test(".getById (свой зал) Доступ есть", async () => {
         const r1 = await hall.getById({
           id: 62,
         });
         expectHasAccess(r1);
+      });
+
+      test(".getById (чужой зал) Доступа нет", async () => {
+        const r1 = await hall.getById({
+          id: 383,
+        });
+        expectHasNotAccess(r1);
       });
 
       test(".update Доступа нет", async () => {
@@ -189,9 +196,9 @@ describe("Права доступа", () => {
     });
 
     describe("History", () => {
-      test(".filter Доступ есть", async () => {
+      test(".filter (свой игрок) Доступ есть", async () => {
         const r1 = await history.filter({
-          playerId: 30,
+          playerId: 415,
           sessionStartedAt: 1607431055,
           sessionFinishedAt: 1607433684,
           paging: {
@@ -201,10 +208,23 @@ describe("Права доступа", () => {
         });
         expectHasAccess(r1);
       });
+
+      test(".filter (чужой игрок) Доступа нет", async () => {
+        const r1 = await history.filter({
+          playerId: 410,
+          sessionStartedAt: 1607431055,
+          sessionFinishedAt: 1607433684,
+          paging: {
+            offset: 0,
+            limit: 100,
+          },
+        });
+        expectHasNotAccess(r1);
+      });
     });
 
     describe("Player", () => {
-      test(".create (свой) Доступ есть", async () => {
+      test(".create (свой зал) Доступ есть", async () => {
         var randomLogin = generateRandomLogin("AutoTest_", 16);
         const r1 = await player.create({
           login: randomLogin,
@@ -216,11 +236,11 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".create (чужой) Доступа нет", async () => {
+      test(".create (чужой зал) Доступа нет", async () => {
         var randomLogin = generateRandomLogin("AutoTest_", 16);
         const r1 = await player.create({
           login: randomLogin,
-          hallId: 415,
+          hallId: 383,
           password: "123456",
           balance: 1000,
           isBlocked: false,
@@ -228,7 +248,7 @@ describe("Права доступа", () => {
         expectHasNotAccess(r1);
       });
 
-      test(".depositMoney Доступ есть", async () => {
+      test(".depositMoney (свой игрок) Доступ есть", async () => {
         const r1 = await player.depositMoney({
           id: 212,
           amount: 100,
@@ -236,15 +256,15 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".depositMoney (чужой) Доступа нет", async () => {
+      test(".depositMoney (чужой игрок) Доступа нет", async () => {
         const r1 = await player.depositMoney({
-          id: 417,
+          id: 413,
           amount: 100,
         });
-        expectHasNotAccess(r1);
+        expectHasAccess(r1);
       });
 
-      test(".withdrawMoney Доступ есть", async () => {
+      test(".withdrawMoney (свой игрок) Доступ есть", async () => {
         const r1 = await player.withdrawMoney({
           id: 212,
           amount: 100,
@@ -252,15 +272,15 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".withdrawMoney (чужой) Доступа нет", async () => {
+      test(".withdrawMoney (чужой игрок) Доступа нет", async () => {
         const r1 = await player.withdrawMoney({
-          id: 417,
+          id: 413,
           amount: 100,
         });
         expectHasNotAccess(r1);
       });
 
-      test(".filter Доступ есть", async () => {
+      test(".filter (свой зал) Доступ есть", async () => {
         const r1 = await player.filter({
           hallId: 62,
           paging: {
@@ -271,9 +291,9 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".filter (чужой) Доступа нет", async () => {
+      test(".filter (чужой зал) Доступа нет", async () => {
         const r1 = await player.filter({
-          hallId: 415,
+          hallId: 383,
           paging: {
             offset: 0,
             limit: 100,
@@ -282,16 +302,16 @@ describe("Права доступа", () => {
         expectHasNotAccess(r1);
       });
 
-      test(".getById (свой) Доступ есть", async () => {
+      test(".getById (свой игрок) Доступ есть", async () => {
         const r1 = await player.getById({
           id: 212,
         });
         expectHasAccess(r1);
       });
 
-      test(".getById (чужой) Доступа нет", async () => {
+      test(".getById (чужой чужой) Доступа нет", async () => {
         const r1 = await player.getById({
-          id: 345,
+          id: 413,
         });
         expectHasNotAccess(r1);
       });
@@ -304,9 +324,9 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".update (чужой) Доступа нет", async () => {
+      test(".update (чужой игрок) Доступа нет", async () => {
         const r1 = await player.update({
-          id: 345,
+          id: 413,
           password: "123456",
         });
         expectHasNotAccess(r1);
@@ -314,16 +334,16 @@ describe("Права доступа", () => {
     });
 
     describe("Provider", () => {
-      test(".filter (свой) Доступ есть", async () => {
+      test(".filter (свой зал) Доступ есть", async () => {
         const r1 = await provider.filter({
           hallId: 62,
         });
         expectHasAccess(r1);
       });
 
-      test(".filter (чужой) Доступа нет", async () => {
+      test(".filter (чужой зал) Доступа нет", async () => {
         const r1 = await provider.filter({
-          hallId: 415,
+          hallId: 383,
         });
         expectHasNotAccess(r1);
       });
