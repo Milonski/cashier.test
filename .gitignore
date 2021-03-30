@@ -1,2 +1,6 @@
 node_modules/
 coverage/
+agent-output.json
+cashier-output.json
+hall-output.json
+superadmin-output.json
