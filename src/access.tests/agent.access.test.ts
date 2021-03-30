@@ -573,7 +573,7 @@ describe("Права доступа", () => {
         expectHasAccess(r1);
       });
 
-      test(".revokeAccess (чежой агент) Доступа нет", async () => {
+      test(".revokeAccess (чужой агент) Доступа нет", async () => {
         const r1 = await website.revokeAccess({
           ids: [29],
           agentId: 551,
