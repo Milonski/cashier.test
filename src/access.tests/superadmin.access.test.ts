@@ -29,10 +29,11 @@ describe("Права доступа", () => {
     const game = new GameAPI(client);
 
     beforeAll(async () => {
-      await user.logIn({
+      const r = await user.logIn({
         login: "new_admin",
         password: "113322",
       });
+      expect(r).toHaveProperty("result");
     });
 
     afterAll(async () => {

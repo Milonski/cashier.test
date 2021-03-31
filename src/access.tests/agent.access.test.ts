@@ -153,7 +153,7 @@ describe("Права доступа", () => {
 
       test(".update (чужой) Доступа нет", async () => {
         const r1 = await agent.update({
-          id: 417,
+          id: 405,
           password: "123456",
         });
         expectHasNotAccess(r1);

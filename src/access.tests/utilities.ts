@@ -1,5 +1,5 @@
 export function expectHasAccess(response) {
-  // expect(response).not.toHaveProperty("error");
+  //expect(response).not.toHaveProperty("error");
   // expect(response).not.toHaveProperty("error.code");
   expect(response).not.toHaveProperty("error.code", -32001);
 }
