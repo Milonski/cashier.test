@@ -74,7 +74,7 @@ export type TAgent = {
   isBlocked: boolean;
   isBalanceUnlimited: boolean;
   balance: number;
-  currency: string;
+  currency: string | null;
   subagentsCount: number;
   hallsCount: number;
 };
