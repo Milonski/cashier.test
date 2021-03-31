@@ -15,7 +15,7 @@ import { generateRandomLogin } from "../utilities";
 import { expectHasAccess, expectHasNotAccess } from "./utilities";
 
 describe("Права доступа", () => {
-  describe("От роли Админа Зала (AutoTest_Hall_Limited / 113322)", () => {
+  describe("От роли Админа Зала (AutoTest_Hall_Limited)", () => {
     const client = new Client();
     const user = new UserAPI(client);
     const agent = new AgentAPI(client);
@@ -29,10 +29,11 @@ describe("Права доступа", () => {
     const game = new GameAPI(client);
 
     beforeAll(async () => {
-      await user.logIn({
+      const r = await user.logIn({
         login: "AutoTest_Hall_Limited",
-        password: "113322",
+        password: "123456",
       });
+      expect(r).toHaveProperty("result");
     });
 
     afterAll(async () => {
@@ -214,6 +215,7 @@ describe("Права доступа", () => {
             limit: 100,
           },
         });
+
         expectHasAccess(r1);
       });
     });
@@ -228,6 +230,7 @@ describe("Права доступа", () => {
           balance: 1000,
           isBlocked: false,
         });
+
         expectHasAccess(r1);
       });
 
@@ -419,7 +422,7 @@ describe("Права доступа", () => {
             limit: 100,
           },
         });
-        expectHasNotAccess(r1);
+        expectHasAccess(r1);
       });
     });
   });
