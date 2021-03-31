@@ -76,6 +76,7 @@ describe("Права доступа", () => {
 
       test(".filter Доступа нет", async () => {
         const r1 = await agent.filter({
+          clientId: 30,
           parentAgentId: 414,
           paging: {
             offset: 0,
