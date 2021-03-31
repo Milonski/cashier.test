@@ -15,7 +15,7 @@ type TCreateParams = {
 };
 
 type TFilterParams = {
-  clientId?: number;
+  clientId: number;
   parentAgentId?: number;
   currency?: any;
   searchQuery?: any;
