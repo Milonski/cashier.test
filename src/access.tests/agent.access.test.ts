@@ -15,7 +15,7 @@ import { generateRandomLogin } from "../utilities";
 import { expectHasAccess, expectHasNotAccess } from "./utilities";
 
 describe("Права доступа", () => {
-  describe("От роли Агента (AutoTest_LimitedAgent_Elena / 113322)", () => {
+  describe("От роли Агента (AutoTest_LimitedAgent_Elena)", () => {
     const client = new Client();
     const user = new UserAPI(client);
     const agent = new AgentAPI(client);
@@ -29,10 +29,11 @@ describe("Права доступа", () => {
     const game = new GameAPI(client);
 
     beforeAll(async () => {
-      await user.logIn({
+      const r = await user.logIn({
         login: "AutoTest_LimitedAgent_Elena",
         password: "113322",
       });
+      expect(r).toHaveProperty("result");
     });
 
     afterAll(async () => {
@@ -137,7 +138,7 @@ describe("Права доступа", () => {
 
       test(".getById (чужой) Доступа нет", async () => {
         const r1 = await agent.getById({
-          id: 417,
+          id: 405,
         });
         expectHasNotAccess(r1);
       });
@@ -270,6 +271,7 @@ describe("Права доступа", () => {
             limit: 100,
           },
         });
+
         expectHasNotAccess(r1);
       });
 
