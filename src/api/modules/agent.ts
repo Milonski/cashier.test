@@ -1,14 +1,14 @@
 import { Client } from "../client";
-import {TAgent, TChangeMoneyParams, TGetByIdParams} from "../types";
+import { TAgent, TChangeMoneyParams, TGetByIdParams } from "../types";
 
 type TCreateParams = {
   clientId: number;
   parentAgentId?: number;
   login: any;
-  password:any;
+  password: any;
   name: any;
   balance?: any;
-  currency: any;
+  currency: any | null;
   canHaveChildren: boolean;
   isBlocked: boolean;
   isBalanceUnlimited: boolean;
@@ -20,10 +20,10 @@ type TFilterParams = {
   currency?: any;
   searchQuery?: any;
   nestingLevel?: number;
-    paging: {
-      offset: number;
-      limit: number;
-    }
+  paging: {
+    offset: number;
+    limit: number;
+  };
 };
 
 type TUpdateParams = {
@@ -31,8 +31,8 @@ type TUpdateParams = {
   password?: any;
   isBlocked?: boolean;
   isBalanceUnlimited?: boolean;
-  canHaveChildren?: boolean
-}
+  canHaveChildren?: boolean;
+};
 
 class AgentAPI {
   constructor(private client: Client) {}
@@ -50,7 +50,10 @@ class AgentAPI {
   }
 
   filter(params: TFilterParams) {
-    return this.client.send<{data: TAgent[]; total: number; }>("Agent.filter", params);
+    return this.client.send<{ data: TAgent[]; total: number }>(
+      "Agent.filter",
+      params
+    );
   }
 
   getById(params: TGetByIdParams) {
